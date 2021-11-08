@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.810.11
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atmv1", "Atmv1\Atmv1.csproj", "{A0E0FE17-CE0B-429F-BB3E-D9B6BE3578C4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A0E0FE17-CE0B-429F-BB3E-D9B6BE3578C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0E0FE17-CE0B-429F-BB3E-D9B6BE3578C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0E0FE17-CE0B-429F-BB3E-D9B6BE3578C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0E0FE17-CE0B-429F-BB3E-D9B6BE3578C4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {713B86C3-614A-4D7C-AABB-CD9EC9627D93}
+	EndGlobalSection
+EndGlobal
