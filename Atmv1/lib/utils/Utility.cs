@@ -103,9 +103,6 @@ namespace Atmv1.lib.utils
         }
         #endregion
 
-        // PrintEnterMessage is originally located at AtmScreen class but
-        // moved to here to remove the dependency of this class to AtmScreen
-        // since it is only used twice here.
         public static void PrintEnterMessage()
         {
             Console.WriteLine("\nPress enter to continue.");

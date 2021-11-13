@@ -8,9 +8,7 @@ namespace Atmv1.lib.utils
 {
     public static class Validator
     {
-        // This class in charge of user input validation.
-        // Validation here will not include business rules validation.
-
+        
         public static T Convert<T>(this string input)
         {
             bool valid = false;
@@ -24,7 +22,7 @@ namespace Atmv1.lib.utils
                 {
                     var converter = TypeDescriptor.GetConverter(typeof(T));
                     if (converter != null)
-                        // Cast ConvertFromString(string text) : object to (T)
+                        
                         return (T)converter.ConvertFromString(rawInput);
 
                     return default;

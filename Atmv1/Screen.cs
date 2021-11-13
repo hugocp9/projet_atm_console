@@ -8,13 +8,13 @@ namespace Atmv1
     {
         // This class in charge of printing out text in user interface.
 
-        internal const string cur = "RM ";
+        internal const string cur = "$ ";
 
         internal static void WelcomeATM()
         {
             Console.Clear();
-            Console.Title = "Meybank ATM System.";
-            Console.WriteLine("Welcome to Meybank ATM.\n");
+            Console.Title = "YouBank ATM System.";
+            Console.WriteLine("Welcome to YouBank ATM.\n");
             Console.WriteLine("Please insert your ATM card.");
             Utility.PrintEnterMessage();
         }
@@ -39,10 +39,6 @@ namespace Atmv1
         {
             var vmUserBankAccount = new UserBankAccount();
 
-            // Actual ATM system will accept and validate physical ATM card.
-            // Card validation includes read card number and check bank account status
-            // and other security checking.
-
             vmUserBankAccount.CardNumber = Validator.Convert<long>("card number");
 
             vmUserBankAccount.CardPin = Convert.ToInt32(Utility.GetHiddenConsoleInput("Enter card pin: "));
@@ -59,8 +55,8 @@ namespace Atmv1
 
         internal static void LogoutProgress()
         {
-            Console.WriteLine("Thank you for using Meybank ATM system.");
-            Utility.printDotAnimation();
+            Console.WriteLine("Thank you for using YouBank ATM system.");
+            Utility.printDotAnimation(5);
             Console.Clear();
         }
 
@@ -79,8 +75,6 @@ namespace Atmv1
             Console.WriteLine("| 6. Logout                  |");
             Console.WriteLine("|                            |");
             Console.WriteLine(" ---------------------------");
-
-            // The menu selection is tied to Enum:SecureMenu.
         }
 
         internal static void PrintCheckBalanceScreen()
@@ -88,30 +82,19 @@ namespace Atmv1
             Console.Write("Account balance amount: ");
         }
 
-        // This is the only non-static method.
-        // Reason is this method needs to return an object.
-        // ToDo: Find other way to solve this design issue.
         internal Transfer TransferForm()
         {
             var Transfer = new Transfer();
 
-            //vMThirdPartyTransfer.RecipientBankAccountNumber = Validator.GetValidIntInputAmt("recipient's account number");
             Transfer.RecipientBankAccountNumber = Validator.Convert<long>("recipient's account number");
 
-            //vMThirdPartyTransfer.TransferAmount = Validator.GetValidDecimalInputAmt($"amount {AtmScreen.cur}");            
             Transfer.TransferAmount = Validator.Convert<decimal>($"amount {cur}");
 
             Transfer.RecipientBankAccountName = Utility.GetRawInput("recipient's account name");
-            // no validation here yet.
-
+            
             return Transfer;
         }
 
-        // moved to Utility class. See remarks there.
-        //internal static void PrintEnterMessage()
-        //{
-        //    Console.WriteLine("\nPress enter to continue.");
-        //    Console.ReadKey();
-        //}
+        
     }
 }

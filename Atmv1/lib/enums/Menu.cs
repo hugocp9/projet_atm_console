@@ -4,8 +4,6 @@ namespace Atmv1.lib.enums
 {
     public enum Menu
     {
-        // Value 1 is needed because menu starts with 1 while enum starts with 0 if no value given.
-
         [Description("Check balance")]
         CheckBalance = 1,
 

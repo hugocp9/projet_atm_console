@@ -14,7 +14,7 @@ namespace Atmv1
         // This class in charge of main application where by Initialization and Execute 
         // method will be the only methods to be called when client code run this application.
 
-        // This list is used in replace of database in this version.
+        // This list is used in replace of database.
         private List<UserBankAccount> _accountList;
         private UserBankAccount selectedAccount;
         private const decimal minimum_kept_amt = 20;
@@ -74,9 +74,6 @@ namespace Atmv1
                             selectedAccount = account;
                             if (selectedAccount.IsLocked)
                             {
-                                // This is when database is used and when the app is restarted.
-                                // Even user login with the correct card number and pin,
-                                // If IsLocked status is locked, user still will be still blocked.
                                 Screen.PrintLockAccount();
                             }
                             else
@@ -93,7 +90,6 @@ namespace Atmv1
                 {
                     Utility.PrintMessage("Invalid card number or PIN.", false);
 
-                    // Lock the account if user fail to login more than 3 times.
                     selectedAccount.IsLocked = selectedAccount.TotalLogin == 3;
                     if (selectedAccount.IsLocked)
                         Screen.PrintLockAccount();
@@ -146,9 +142,6 @@ namespace Atmv1
 
         public void PlaceDeposit()
         {
-            // Note: Actual ATM system will just let you
-            // place bank notes into physical ATM machine.
-
             Utility.PrintConsoleWriteLine("\nNote: Actual ATM system will just\nlet you " +
             "place bank notes into physical ATM machine. \n");
 
@@ -159,7 +152,6 @@ namespace Atmv1
             Console.SetCursorPosition(0, Console.CursorTop - 3);
             Console.WriteLine("");
 
-            // Guard clause
             if (transaction_amt <= 0)
             {
                 Utility.PrintMessage("Amount needs to be more than zero. Try again.", false);
@@ -178,13 +170,9 @@ namespace Atmv1
                 return;
             }
 
-            // Bind transaction_amt to Transaction object
-            // Add transaction record - Start            
             InsertTransaction(selectedAccount.Id, TransactionType.Deposit, +
                 transaction_amt, "");
-            // Add transaction record - End
 
-            // Another method to update account balance.
             selectedAccount.AccountBalance = selectedAccount.AccountBalance + transaction_amt;
 
             Utility.PrintMessage($"You have successfully deposited {Utility.FormatAmount(transaction_amt)}. " +
@@ -198,7 +186,6 @@ namespace Atmv1
 
             var transaction_amt = Validator.Convert<int>($"amount {Screen.cur}");
 
-            // Input data validation - Start
             if (transaction_amt <= 0)
             {
                 Utility.PrintMessage("Amount needs to be more than zero. Try again.", false);
@@ -210,10 +197,8 @@ namespace Atmv1
                 Utility.PrintMessage($"Key in the deposit amount only with multiply of 10. Try again.", false);
                 return;
             }
-            // Input data validation - End
 
 
-            // Business rules validation - Start
             if (transaction_amt > selectedAccount.AccountBalance)
             {
                 Utility.PrintMessage($"Withdrawal failed. You do not have enough fund to withdraw {Utility.FormatAmount(transaction_amt)}", false);
@@ -225,16 +210,11 @@ namespace Atmv1
                 Utility.PrintMessage($"Withdrawal failed. Your account needs to have minimum {Utility.FormatAmount(minimum_kept_amt)}", false);
                 return;
             }
-            // Business rules validation - End
 
 
-            // Bind transaction_amt to Transaction object
-            // Add transaction record - Start
             InsertTransaction(selectedAccount.Id, TransactionType.Withdrawal, +
                 -transaction_amt, "");
-            // Add transaction record - End
 
-            // Another method to update account balance.
             selectedAccount.AccountBalance = selectedAccount.AccountBalance - transaction_amt;
 
             Utility.PrintMessage("Please collect your money. You have successfully withdraw " +
@@ -250,7 +230,6 @@ namespace Atmv1
                 return;
             }
 
-            // Check giver's account balance - Start
             if (Transfer.TransferAmount > selectedAccount.AccountBalance)
             {
                 Utility.PrintMessage("Withdrawal failed. You do not have enough " +
@@ -264,9 +243,7 @@ namespace Atmv1
                     $"minimum {Utility.FormatAmount(minimum_kept_amt)}", false);
                 return;
             }
-            // Check giver's account balance - End
 
-            // Check if receiver's bank account number is valid.
             var selectedBankAccountReceiver = (from b in _accountList
                                                where b.AccountNumber == Transfer.RecipientBankAccountNumber
                                                select b).FirstOrDefault();
@@ -283,23 +260,16 @@ namespace Atmv1
                 return;
             }
 
-            // Bind transaction_amt to Transaction object
-            // Add transaction record (Giver) - Start            
             InsertTransaction(selectedAccount.Id, TransactionType.Transfer, +
                 -Transfer.TransferAmount, "Transfered " +
                 $" to {selectedBankAccountReceiver.AccountNumber} ({selectedBankAccountReceiver.FullName})");
-            // Add transaction record (Giver) - End
 
-            // Update balance amount (Giver)
             selectedAccount.AccountBalance = selectedAccount.AccountBalance - Transfer.TransferAmount;
 
-            // Add transaction record (Receiver) - Start
             InsertTransaction(selectedBankAccountReceiver.Id, TransactionType.ThirdPartyTransfer, +
                 Transfer.TransferAmount, "Transfered " +
                 $" from {selectedAccount.AccountNumber} ({selectedAccount.FullName})");
-            // Add transaction record (Receiver) - End
-
-            // Update balance amount (Receiver)
+                        
             selectedBankAccountReceiver.AccountBalance = selectedBankAccountReceiver.AccountBalance + Transfer.TransferAmount;
 
             Utility.PrintMessage("You have successfully transferred out " +
@@ -325,7 +295,7 @@ namespace Atmv1
 
         public void ViewTransaction()
         {
-            // Filter transaction list
+           
             var filteredTransactionList = _listOfTransactions.Where(t => t.UserBankAccountId == selectedAccount.Id).ToList();
 
             if (filteredTransactionList.Count <= 0)

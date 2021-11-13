@@ -17,11 +17,7 @@ namespace Atmv1.lib.entities
 
         public decimal TransactionAmount { get; set; }
 
-        // Moved to ATMApp to removed dependency.
-        //public Transaction()
-        //{
-        //    TransactionId = Utility.GetTransactionId();
-        //}
+        
     }
 
 }

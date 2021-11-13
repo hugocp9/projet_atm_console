@@ -1,5 +1,4 @@
 ﻿using Atmv1.lib.enums;
-using Atmv1.lib.entities;
 
 namespace Atmv1.lib.interfaces
 {
