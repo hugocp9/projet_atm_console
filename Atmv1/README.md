@@ -1,5 +1,5 @@
 ﻿# ATM Console with OOP
-Implemented Object-Oriented Programming like interface, class and object.
+El Anzi Sofiane, Villemade Hugo.
 
 
 ### Software Development Summary
@@ -20,7 +20,7 @@ Implemented Object-Oriented Programming like interface, class and object.
 - [x] View bank transactions
 
 #### Business Rules:
-- User is not allow to withdraw or transfer more than the balance amount. A minimum RM20 is needed to maintain the bank account.
+- User is not allow to withdraw or transfer more than the balance amount. A minimum RM 20 is needed to maintain the bank account.
 - If user key in the wrong pin more than 3 times, the bank account will be locked.
 
 #### Assumption:

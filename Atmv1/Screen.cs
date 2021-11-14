@@ -8,7 +8,7 @@ namespace Atmv1
     {
         // This class in charge of printing out text in user interface.
 
-        internal const string cur = "$ ";
+        internal const string cur = "RM ";
 
         internal static void WelcomeATM()
         {
@@ -70,7 +70,7 @@ namespace Atmv1
             Console.WriteLine("| 1. Balance Enquiry         |");
             Console.WriteLine("| 2. Cash Deposit            |");
             Console.WriteLine("| 3. Withdrawal              |");
-            Console.WriteLine("| 4. Third Party Transfer    |");
+            Console.WriteLine("| 4. Transfer                |");
             Console.WriteLine("| 5. Transactions            |");
             Console.WriteLine("| 6. Logout                  |");
             Console.WriteLine("|                            |");

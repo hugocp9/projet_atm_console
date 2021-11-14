@@ -13,8 +13,8 @@ namespace Atmv1.lib.enums
         [Description("Make Withdrawal")]
         MakeWithdrawal = 3,
 
-        [Description("Third Party Transfer")]
-        ThirdPartyTransfer = 4,
+        [Description("Transfer")]
+        Transfer = 4,
 
         [Description("Transaction")]
         ViewTransaction = 5,

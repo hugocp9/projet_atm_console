@@ -113,18 +113,16 @@ namespace Atmv1
                     MakeWithdrawal();
                     break;
                 case (int)Menu.Transfer:
-
                     var Transfer = screen.TransferForm();
                     PerformTransfer(Transfer);
                     break;
                 case (int)Menu.ViewTransaction:
                     ViewTransaction();
                     break;
-
                 case (int)Menu.Logout:
                     Screen.LogoutProgress();
                     Utility.PrintConsoleWriteLine("You have succesfully logout. Please collect your ATM card.");
-                    ClearSession();
+                    Console.Clear();
                     Execute();
                     break;
                 default:
@@ -266,7 +264,7 @@ namespace Atmv1
 
             selectedAccount.AccountBalance = selectedAccount.AccountBalance - Transfer.TransferAmount;
 
-            InsertTransaction(selectedBankAccountReceiver.Id, TransactionType.ThirdPartyTransfer, +
+            InsertTransaction(selectedBankAccountReceiver.Id, TransactionType.Transfer, +
                 Transfer.TransferAmount, "Transfered " +
                 $" from {selectedAccount.AccountNumber} ({selectedAccount.FullName})");
                         
